@@ -1,13 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowBack } from "react-icons/md";
 
 import masterCard from "../images/logos_mastercard.png";
 
 export default function Payment() {
+  const navigate = useNavigate();
+
   return (
     <section className="px-6">
       <div className="flex justify-between">
         <h3 className="text-xl font-semibold">Payment Details</h3>
-        <button className="">
+        <button className="" onClick={() => navigate(-1)}>
           <MdOutlineArrowBack size={20} />
         </button>
       </div>
