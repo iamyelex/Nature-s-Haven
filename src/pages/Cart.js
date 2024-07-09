@@ -7,6 +7,7 @@ import curry from "../images/curry.png";
 import seed from "../images/seed.png";
 import carrot from "../images/carrot.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const cartItemList = [
   { label: "Carrot", image: carrot, price: 2000, total: 2000 },
@@ -15,6 +16,12 @@ const cartItemList = [
 ];
 
 export default function Cart() {
+  const [showPayment, setShowPayment] = useState(false);
+
+  const showPaymentHandle = function () {
+    setShowPayment(true);
+  };
+
   const navigate = useNavigate();
   return (
     <section className="font-inter px-6 lg:px-32 md:space-y-7">
@@ -110,6 +117,15 @@ export default function Cart() {
                   N6250
                 </span>
               </div>
+              <div className="hidden md:block">
+                <button
+                  className="text-[15px] text-white font-semibold bg-secondary py-1 rounded-lg w-full"
+                  onClick={showPaymentHandle}
+                >
+                  Checkout
+                </button>
+              </div>
+
               <div className="md:hidden">
                 <Link to="/payment">
                   <button className="text-[15px] text-white font-semibold bg-secondary py-1 rounded-lg w-full">
@@ -123,47 +139,49 @@ export default function Cart() {
       </div>
 
       {/* PAYMENT DESKTOP VIEW */}
-      <div className="hidden md:block bg-[#F1F1F1] h-[332px] pt-16 pl-9 rounded-lg">
-        <div className="w-1/3 space-y-2">
-          <p className="text-xl font-semibold">Card number</p>
-          <div className="relative flex items-center">
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="XXXX XXXX XXXX XXXX"
-              className="text-xs py-[6px] w-[310px] pl-2 border ml-5 outline-none"
-            />
-            <img src={masterCard} alt="" className="absolute right-8" />
-          </div>
-          <div className="flex space-x-8">
-            <div className="">
-              <p className="text-xl font-semibold">Expiration</p>
+      {showPayment ? (
+        <div className="hidden md:block bg-[#F1F1F1] h-[332px] pt-16 pl-9 rounded-lg">
+          <div className="w-1/3 space-y-2">
+            <p className="text-xl font-semibold">Card number</p>
+            <div className="relative flex items-center">
               <input
                 type="text"
                 name=""
                 id=""
-                className="border w-[97px] outline-none mt-2 ml-5"
+                placeholder="XXXX XXXX XXXX XXXX"
+                className="text-xs py-[6px] w-[310px] pl-2 border ml-5 outline-none"
               />
+              <img src={masterCard} alt="" className="absolute right-8" />
             </div>
-            <div className="">
-              <p className="text-xl font-semibold">CVC</p>
-              <input
-                type="text"
-                name=""
-                id=""
-                className="border w-[97px] outline-none mt-2"
-              />
+            <div className="flex space-x-8">
+              <div className="">
+                <p className="text-xl font-semibold">Expiration</p>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="border w-[97px] outline-none mt-2 ml-5"
+                />
+              </div>
+              <div className="">
+                <p className="text-xl font-semibold">CVC</p>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="border w-[97px] outline-none mt-2"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-12 ml-8 w-1/3">
-          <button className="text-xl text-white font-semibold bg-secondary py-1 px-12 rounded-lg">
-            Confirm Payment
-          </button>
+          <div className="mt-12 ml-8 w-1/3">
+            <button className="text-xl text-white font-semibold bg-secondary py-1 px-12 rounded-lg">
+              Confirm Payment
+            </button>
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }
