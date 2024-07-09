@@ -175,7 +175,7 @@ export default function Cart() {
             </div>
           </div>
 
-          <div className="mt-12 ml-8 w-1/3">
+          <div className="mt-12 lg:ml-8 lg:w-1/3">
             <button className="text-xl text-white font-semibold bg-secondary py-1 px-12 rounded-lg">
               Confirm Payment
             </button>
