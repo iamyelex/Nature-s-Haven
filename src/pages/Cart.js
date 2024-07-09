@@ -27,7 +27,7 @@ export default function Cart() {
           <MdOutlineArrowBack className="" />
           <span className="text-base font-semibold">Continue shopping</span>
         </button>
-        <button className="md:hidden">
+        <button className="md:hidden" onClick={() => navigate(-1)}>
           <MdOutlineArrowBack size={25} />
         </button>
       </div>

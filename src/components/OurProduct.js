@@ -36,7 +36,10 @@ const productsList = [
 
 export default function OurProduct() {
   return (
-    <section className="px-6 lg:px-32 mt-10 space-y-4 md:space-y-8 font-inter">
+    <section
+      id="ourProducts"
+      className="px-6 lg:px-32 mt-10 space-y-4 md:space-y-8 font-inter"
+    >
       <h3 className="text-xl md:text-2xl text-center font-semibold">
         Our Products
       </h3>
@@ -44,6 +47,7 @@ export default function OurProduct() {
       <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6">
         {productsList.map((list) => (
           <OurProductCard
+            key={list.label}
             label={list.label}
             image={list.image}
             price={list.price}

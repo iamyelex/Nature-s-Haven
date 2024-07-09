@@ -1,3 +1,4 @@
+import { HashLink } from "react-router-hash-link";
 import groceryCart from "../images/svg/groceryCart.svg";
 
 export default function CTA() {
@@ -10,9 +11,17 @@ export default function CTA() {
         <p className="text-xs lg:text-xl font-light lg:w-3/6">
           They are produced by methods that comply with the standard of farming
         </p>
-        <button className="text-white font-semibold bg-secondary py-2 px-4 lg:py-4 lg:px-8 rounded-xl capitalize hover:text-secondary hover:bg-white transition duration-100 ease-in">
-          shop now
-        </button>
+
+        <div>
+          <HashLink
+            scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
+            to="#ourProducts"
+          >
+            <button className="text-white font-semibold bg-secondary py-2 px-4 lg:py-4 lg:px-8 rounded-xl capitalize hover:text-secondary hover:bg-white transition duration-100 ease-in">
+              shop now
+            </button>
+          </HashLink>
+        </div>
       </div>
 
       <div className="">
