@@ -1,40 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
 import OurProductCard from "./OurProductCard";
+import Spinner from "./Spinner";
 
-import seed from "../images/seed.png";
-import paprika from "../images/paprika.png";
-import bayLeave from "../images/bayLeave.png";
-import curry from "../images/curry.png";
-import tomatoes from "../images/tomatoes.png";
-import brocoli from "../images/brocoli.png";
-import banana from "../images/banana.png";
-import coconut from "../images/coconut.png";
-import freshJuice from "../images/freshJuice.png";
-import waterlemon from "../images/waterlemon.png";
-import irish from "../images/irish.png";
-import bellPepper from "../images/bellPepper.png";
-import corn from "../images/corn.png";
-import carrot from "../images/carrot.png";
-import onion from "../images/onions.png";
-
-const productsList = [
-  { label: "Corriander seeds", price: 1200, image: seed },
-  { label: "Paprika powder", price: 1200, image: paprika },
-  { label: "Bay leaves", price: 1000, image: bayLeave },
-  { label: "Curry powder", price: 1200, image: curry },
-  { label: "Tomatoes", price: 2500, image: tomatoes },
-  { label: "Broccoli", price: 1200, image: brocoli },
-  { label: "Bananas", price: 2000, image: banana },
-  { label: "Coconut", price: 900, image: coconut },
-  { label: "Fresh juice", price: 1200, image: freshJuice },
-  { label: "Watermelon drink", price: 1200, image: waterlemon },
-  { label: "Irish potatoes", price: 4000, image: irish },
-  { label: "Bell pepper", price: 800, image: bellPepper },
-  { label: "Corn", price: 1200, image: corn },
-  { label: "Carrots", price: 1200, image: carrot },
-  { label: "Onions", price: 1200, image: onion },
-];
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
+const apiKey = process.env.REACT_APP_API_KEY;
+const appId = process.env.REACT_APP_APP_ID;
 
 export default function OurProduct() {
+  const { data, isLoading } = useQuery({
+    queryFn: async function () {
+      const { data } = await axios.get(
+        `${baseUrl}products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
+      );
+      console.log(data.items);
+      return data;
+    },
+  });
+
   return (
     <section
       id="ourProducts"
@@ -45,14 +30,19 @@ export default function OurProduct() {
       </h3>
 
       <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6">
-        {productsList.map((list) => (
-          <OurProductCard
-            key={list.label}
-            label={list.label}
-            image={list.image}
-            price={list.price}
-          />
-        ))}
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          data.items.map((product) => (
+            <OurProductCard
+              key={product.unique_id}
+              label={product.name}
+              image={product.photos[0].url}
+              price={product.current_price[0].NGN[0]}
+              id={product.id}
+            />
+          ))
+        )}
       </div>
     </section>
   );

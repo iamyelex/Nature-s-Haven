@@ -10,6 +10,7 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
+import Product from "./pages/Product";
 
 // const RootLayout = lazy(() => import("./layouts/RootLayout"));
 // const Home = lazy(() => import("./pages/Home"));
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="cart" element={<Cart />} />
       <Route path="payment" element={<Payment />} />
+      <Route path="products/:productId" element={<Product />} />
     </Route>
   )
 );
