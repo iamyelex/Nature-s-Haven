@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineArrowBack, MdOutlineFavoriteBorder } from "react-icons/md";
 
-// import onions from "../images/onions.png";
 import Spinner from "../components/Spinner";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -48,7 +47,7 @@ export default function Product() {
 
           <div className="flex flex-col md:flex-row md:gap-20 space-y-2">
             <img
-              src={`${baseUrl}images/${data.photos[0].url}?${organizationId}`}
+              //   src={`${baseUrl}images/${data?.photos[0]?.url}?${organizationId}`}
               alt={data.name}
               className="w-full"
             />
@@ -62,6 +61,7 @@ export default function Product() {
               <button className="text-white text-lg w-full py-2 bg-other px-1 rounded-md md:rounded-md">
                 Add to cart
               </button>
+              <h4>Description</h4>
               <p>
                 Description Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Ipsam sed voluptate, ipsa numquam inventore, omnis

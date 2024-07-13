@@ -29,21 +29,22 @@ export default function OurProduct() {
         Our Products
       </h3>
 
-      <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6">
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          data.items.map((product) => (
-            <OurProductCard
-              key={product.unique_id}
-              label={product.name}
-              image={product.photos[0].url}
-              price={product.current_price[0].NGN[0]}
-              id={product.id}
-            />
-          ))
-        )}
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6">
+          {data &&
+            data.items.map((product) => (
+              <OurProductCard
+                key={product.unique_id}
+                label={product.name}
+                // image={product?.photos[0]?.url}
+                price={product.current_price[0].NGN[0]}
+                id={product.id}
+              />
+            ))}
+        </div>
+      )}
     </section>
   );
 }

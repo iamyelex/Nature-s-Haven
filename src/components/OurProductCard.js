@@ -17,7 +17,7 @@ export default function OurProductCard({ label, price, image, id }) {
       className="flex flex-col justify-between rounded-lg md:rounded-xl space-y-1 shadow-md shadow-shadowColor pb-2"
     >
       <img
-        src={`${baseUrl}images/${image}?${organizationId}`}
+        // src={`${baseUrl}images/${image}`}
         alt={label}
         className="w-[94px] h-[92px] md:w-[235px] md:h-[232px]"
       />
