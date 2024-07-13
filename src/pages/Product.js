@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineArrowBack, MdOutlineFavoriteBorder } from "react-icons/md";
 
-import onions from "../images/onions.png";
+// import onions from "../images/onions.png";
 import Spinner from "../components/Spinner";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
