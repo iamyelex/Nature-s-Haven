@@ -15,7 +15,6 @@ export default function OurProduct() {
       const { data } = await axios.get(
         `${baseUrl}products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
       );
-      console.log(data.items);
       return data;
     },
   });
@@ -33,16 +32,19 @@ export default function OurProduct() {
         <Spinner />
       ) : (
         <div className="grid grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6">
-          {data &&
-            data.items.map((product) => (
+          {data?.items ? (
+            data?.items?.map((product) => (
               <OurProductCard
                 key={product.unique_id}
                 label={product.name}
-                // image={product?.photos[0]?.url}
+                image={product?.photos[0]?.url}
                 price={product.current_price[0].NGN[0]}
                 id={product.id}
               />
-            ))}
+            ))
+          ) : (
+            <Spinner />
+          )}
         </div>
       )}
     </section>
