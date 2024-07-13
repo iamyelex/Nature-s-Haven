@@ -3,23 +3,14 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import CartItem from "../cart/CartItem";
 
 import masterCard from "../images/logos_mastercard.png";
-// import curry from "../images/curry.png";
-// import seed from "../images/seed.png";
-// import carrot from "../images/carrot.png";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-// const cartItemList = [
-//   { label: "Carrot", image: carrot, price: 2000, total: 2000 },
-//   { label: "Curry Powder", image: curry, price: 700, total: 700 },
-//   { label: "Corriander Powder", image: seed, price: 1200, total: 2400 },
-// ];
-
 export default function Cart() {
-  const { items, totalAmount, totalQuantity } = useSelector(
-    (store) => store.cart
-  );
+  // const { items, totalAmount, totalQuantity } = useSelector(
+  const { items } = useSelector((store) => store.cart);
   const [showPayment, setShowPayment] = useState(false);
 
   const showPaymentHandle = function () {
