@@ -2,8 +2,8 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
+// const baseUrl = process.env.REACT_APP_BASE_URL;
+// const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
 
 export default function OurProductCard({ label, price, image, id }) {
   // const navigate = useNavigate();
