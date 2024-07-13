@@ -9,9 +9,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Cart() {
-  // const { items, totalAmount, totalQuantity } = useSelector(
-  const { items } = useSelector((store) => store.cart);
+  // const { items, totalAmount, totalQuantity } = useSelector
+  const { items, totalAmount } = useSelector((store) => store.cart);
   const [showPayment, setShowPayment] = useState(false);
+
+  const totalToPay = +(totalAmount + 450);
 
   const showPaymentHandle = function () {
     setShowPayment(true);
@@ -22,7 +24,7 @@ export default function Cart() {
     <section className="font-inter px-6 lg:px-32 md:space-y-7">
       {items.length === 0 ? (
         <div className="flex justify-center items-center pt-40">
-          <p className="text-xl">Cart is empty</p>
+          <p className="text-xl">Your Cart is empty</p>
         </div>
       ) : (
         <>
@@ -63,7 +65,7 @@ export default function Cart() {
                 image={list.image}
                 label={list.title}
                 price={list.price}
-                // quantity={list.quantity}
+                quantity={list.quantity}
                 id={list.id}
               />
             ))}
@@ -105,7 +107,7 @@ export default function Cart() {
                       subtotal
                     </p>
                     <span className="text-[11px] md:text-[15px] font-semibold">
-                      N5800
+                      N{totalAmount}
                     </span>
                   </div>
                   <div className="flex justify-between space-x-10">
@@ -121,7 +123,7 @@ export default function Cart() {
                       total
                     </p>
                     <span className="text-[11px] md:text-[15px] font-semibold">
-                      N6250
+                      N{totalToPay}
                     </span>
                   </div>
                   <div className="hidden md:block">

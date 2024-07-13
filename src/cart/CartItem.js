@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { decreaseCart, increaseCart, removeFromCart } from "./CartSlice";
 import { RiDeleteBinFill } from "react-icons/ri";
 import CartRemoveWarning from "./CartRemoveWarning";
 
 export default function CartItem({ label, price, image, id, quantity }) {
-  const { totalAmount, totalQuantity } = useSelector((store) => store.cart);
   const [removeItem, setRemoveItem] = useState(false);
+  const totalPrice = quantity * price;
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
@@ -38,7 +38,6 @@ export default function CartItem({ label, price, image, id, quantity }) {
     <div className="flex items-center justify-between font-inter md:py-2">
       <div className="flex items-end space-x-2 md:space-x-4">
         <img
-          // src={image}
           src={`${baseUrl}images/${image}?${organizationId}`}
           alt={label}
           className="w-[96px] h-[75px] md:w-[171px] md:h-[134px]"
@@ -71,7 +70,7 @@ export default function CartItem({ label, price, image, id, quantity }) {
           -
         </button>
         <span className="flex items-center justify-center border bg-opacity-55 w-8 h-8">
-          {totalQuantity}
+          {quantity}
         </span>
         <button
           className="text-base font-semibold outline-none"
@@ -83,7 +82,7 @@ export default function CartItem({ label, price, image, id, quantity }) {
 
       <p className="hidden md:block text-base font-semibold">N{price}</p>
 
-      <p className="hidden md:block text-base font-semibold">N{totalAmount}</p>
+      <p className="hidden md:block text-base font-semibold">N{totalPrice}</p>
     </div>
   );
 }

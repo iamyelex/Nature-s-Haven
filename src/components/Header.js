@@ -36,14 +36,14 @@ export default function Header() {
           <MdSearch className="absolute top-1 left-1" />
         </div>
 
-        <Link to="cart" className="relative">
+        <Link to="cart" className="lg:relative">
           <MdOutlineShoppingCart
             size="25px"
             targetY={180}
             className="hidden md:block"
           />
           {items.length > 0 ? (
-            <span className="absolute flex items-center justify-center top-0 right-[4px] text-xs text-white font-bold rounded-full w-4 h-4 bg-black">
+            <span className="absolute flex items-center justify-center top-3 right-14 md:right-6 lg:right-0 lg:top-0 text-xs text-white font-bold rounded-full w-4 h-4 bg-black">
               {items.length}
             </span>
           ) : null}
