@@ -5,12 +5,14 @@ import App from "./App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import store from "./store";
+import { Toaster } from "sonner";
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
+    <Toaster richColors position="top-right" />
     <QueryClientProvider client={queryClient}>
       <React.StrictMode>
         <App />

@@ -6,6 +6,7 @@ import { MdOutlineArrowBack, MdOutlineFavoriteBorder } from "react-icons/md";
 import Spinner from "../components/Spinner";
 import { addToCart } from "../cart/CartSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
@@ -16,6 +17,14 @@ export default function Product() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const addToCartHandler = function () {
+    if (dispatch(addToCart(price, label, id, image))) {
+      toast.success("item added to cart");
+    } else {
+      toast.error("something went wrong");
+    }
+  };
 
   const { data, isLoading } = useQuery({
     queryFn: async function () {
@@ -55,14 +64,14 @@ export default function Product() {
                   <MdOutlineArrowBack size={20} />
                 </button>
               </div>
-              <div className="flex flex-col md:flex-row md:gap-20 space-y-2">
+              <div className="flex flex-col items-center md:flex-row md:gap-20 space-y-2">
                 <img
                   src={`${baseUrl}images/${data?.photos[0]?.url}?${organizationId}`}
                   alt={data?.name}
                   className="w-full md:w-1/3"
                 />
 
-                <div className="pt-2 space-y-4">
+                <div className="pt-2 space-y-3">
                   <div className="flex items-center justify-between">
                     <p className="text-lg font-semibold">{data?.name}</p>
                     <MdOutlineFavoriteBorder
@@ -75,18 +84,13 @@ export default function Product() {
                   </p>
                   <button
                     className="text-white text-lg w-full py-2 bg-other px-1 rounded-md md:rounded-md"
-                    onClick={() => dispatch(addToCart(price, label, id, image))}
+                    onClick={addToCartHandler}
                   >
                     Add to cart
                   </button>
-                  <h4>Description</h4>
-                  <p>
-                    Description Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Ipsam sed voluptate, ipsa numquam
-                    inventore, omnis voluptatem rerum iusto vero, odio hic rem
-                    quos exercitationem aut voluptatum ut perferendis?
-                    Reprehenderit, temporibus!
-                  </p>
+                  <h4 className="font-semibold border-t-2 pt-2">Description</h4>
+                  <p className="text-lg">{data?.name}</p>
+                  <p className="">{data?.description}</p>
                 </div>
               </div>
             </>

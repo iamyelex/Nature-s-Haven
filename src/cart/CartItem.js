@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { decreaseCart, increaseCart, removeFromCart } from "./CartSlice";
 import { RiDeleteBinFill } from "react-icons/ri";
 import CartRemoveWarning from "./CartRemoveWarning";
+import { toast } from "sonner";
 
 export default function CartItem({ label, price, image, id, quantity }) {
   const [removeItem, setRemoveItem] = useState(false);
@@ -14,7 +15,11 @@ export default function CartItem({ label, price, image, id, quantity }) {
   const dispatch = useDispatch();
 
   const removeCart = function () {
-    dispatch(removeFromCart(id));
+    if (dispatch(removeFromCart(id))) {
+      toast.success("item removed from cart");
+    } else {
+      toast.error("something went wrong");
+    }
   };
 
   const addCart = function () {

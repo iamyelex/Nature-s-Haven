@@ -80,7 +80,7 @@ export default function Cart() {
                     <input
                       type="radio"
                       name="delivery_type"
-                      id="store"
+                      id="storePickup"
                       className="outline-none"
                     />
                     <label className="text-xs md:text-sm ">
@@ -91,8 +91,8 @@ export default function Cart() {
                     <input
                       type="radio"
                       name="delivery_type"
-                      id="home"
-                      checked
+                      id="homeDelivery"
+                      // checked
                       className="outline-none"
                     />
                     <label className="text-xs md:text-sm font-semibold">

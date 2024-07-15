@@ -2,7 +2,7 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../cart/CartSlice";
-// import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
@@ -10,10 +10,14 @@ const organizationId = process.env.REACT_APP_ORGANIZATION_ID;
 export default function OurProductCard({ label, price, image, id }) {
   const dispatch = useDispatch();
 
-  // const navigate = useNavigate();
-  // const handleProduct = function () {
-  //   navigate(`/products/${id}`);
-  // };
+  const addToCartHandler = function () {
+    if (dispatch(addToCart(price, label, id, image))) {
+      toast.success("item added to cart");
+    } else {
+      toast.error("something went wrong");
+    }
+  };
+
   return (
     <div className="flex flex-col justify-between rounded-lg md:rounded-xl space-y-1 shadow-md shadow-shadowColor pb-2">
       <Link to={`/products/${id}`}>
@@ -31,7 +35,7 @@ export default function OurProductCard({ label, price, image, id }) {
         <span className="text-[7px] md:text-base font-semibold">N{price}</span>
         <button
           className="text-white text-[6px] md:text-[9px] bg-other px-1 rounded-md md:rounded-md"
-          onClick={() => dispatch(addToCart(price, label, id, image))}
+          onClick={addToCartHandler}
         >
           Add to cart
         </button>
