@@ -4,20 +4,15 @@ import CartItem from "../cart/CartItem";
 
 import masterCard from "../images/logos_mastercard.png";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import ShippingDetails from "../components/ShippingDetails";
 
 export default function Cart() {
   // const { items, totalAmount, totalQuantity } = useSelector
-  const { items, totalAmount } = useSelector((store) => store.cart);
+  const { items } = useSelector((store) => store.cart);
   const [showPayment, setShowPayment] = useState(false);
-
-  const totalToPay = +(totalAmount + 450);
-
-  const showPaymentHandle = function () {
-    setShowPayment(true);
-  };
 
   const navigate = useNavigate();
   return (
@@ -70,81 +65,7 @@ export default function Cart() {
               />
             ))}
 
-            <div className="flex flex-col md:pl-9 md:pt-14 pb-8">
-              <h4 className="text-xl md:text-3xl font-semibold">
-                Delivery mode:
-              </h4>
-              <div className="flex flex-col md:flex-row md:items-center justify-between space-y-10 md:space-y-0">
-                <div className="flex flex-col space-y-2">
-                  <div className="flex space-x-3 pt-2 md:pt-0">
-                    <input
-                      type="radio"
-                      name="delivery_type"
-                      id="storePickup"
-                      className="outline-none"
-                    />
-                    <label className="text-xs md:text-sm ">
-                      Store pickup FREE
-                    </label>
-                  </div>
-                  <div className="flex space-x-3">
-                    <input
-                      type="radio"
-                      name="delivery_type"
-                      id="homeDelivery"
-                      // checked
-                      className="outline-none"
-                    />
-                    <label className="text-xs md:text-sm font-semibold">
-                      Home delivery ( 2 -4 days) 450
-                    </label>
-                  </div>
-                </div>
-
-                <div className="flex flex-col space-y-3 px-6 md:px-0">
-                  <div className="flex justify-between space-x-10">
-                    <p className="text-[11px] md:text-[15px] font-semibold uppercase">
-                      subtotal
-                    </p>
-                    <span className="text-[11px] md:text-[15px] font-semibold">
-                      N{totalAmount}
-                    </span>
-                  </div>
-                  <div className="flex justify-between space-x-10">
-                    <p className="text-[11px] md:text-[15px] font-semibold uppercase">
-                      shipping
-                    </p>
-                    <span className="text-[11px] md:text-[15px] font-semibold">
-                      N450
-                    </span>
-                  </div>
-                  <div className="flex justify-between space-x-10">
-                    <p className="text-[11px] md:text-[15px] font-semibold uppercase">
-                      total
-                    </p>
-                    <span className="text-[11px] md:text-[15px] font-semibold">
-                      N{totalToPay}
-                    </span>
-                  </div>
-                  <div className="hidden md:block">
-                    <button
-                      className="text-[15px] text-white font-semibold bg-secondary py-1 rounded-lg w-full"
-                      onClick={showPaymentHandle}
-                    >
-                      Checkout
-                    </button>
-                  </div>
-
-                  <div className="md:hidden">
-                    <Link to="/payment">
-                      <button className="text-[15px] text-white font-semibold bg-secondary py-1 rounded-lg w-full">
-                        Checkout
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ShippingDetails setShowPayment={setShowPayment} />
           </div>
 
           {/* PAYMENT DESKTOP VIEW */}
