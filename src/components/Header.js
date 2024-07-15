@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { MdOutlineShoppingCart, MdSearch } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
-const headerList = ["home", "about us", "blog", "contact"];
+// const headerList = ["home", "about us", "blog", "contact"];
+const headerList = [
+  { name: "home", path: "/" },
+  { name: "about us", path: "/" },
+  { name: "blog", path: "/" },
+  { name: "contact", path: "/" },
+];
 
 export default function Header() {
   const { items } = useSelector((store) => store.cart);
+  const [showMobileLink, setShowMobileLink] = useState(false);
 
   return (
     <>
@@ -18,10 +26,11 @@ export default function Header() {
         <ul className="hidden md:flex md:space-x-3 lg:space-x-10">
           {headerList.map((list) => (
             <NavLink
+              to={list.path}
               key={list}
               className="lg:font-semibold uppercase hover:text-gray-200 hover:cursor-pointer hover:underline"
             >
-              {list}
+              {list.name}
             </NavLink>
           ))}
         </ul>
@@ -55,9 +64,25 @@ export default function Header() {
           </Link>
 
           {/* HAMBURGER MENU  */}
-          <RxHamburgerMenu />
+          <RxHamburgerMenu onClick={() => setShowMobileLink(!showMobileLink)} />
         </div>
       </header>
+      {showMobileLink ? (
+        <div className="flex items-center justify-center z-50 bg-other h-60 w-full">
+          <ul className=" flex flex-col space-y-4">
+            {headerList.map((list) => (
+              <NavLink
+                to={list.path}
+                key={list}
+                className="font-semibold uppercase hover:text-gray-200 hover:cursor-pointer hover:underline"
+                onClick={() => setShowMobileLink(false)}
+              >
+                {list.name}
+              </NavLink>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="text-center md:hidden relative px-6 pb-6">
         <input
