@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <Toaster richColors position="top-right" />
+    <Toaster duration={2000} richColors position="top-right" />
     <QueryClientProvider client={queryClient}>
       <React.StrictMode>
         <App />

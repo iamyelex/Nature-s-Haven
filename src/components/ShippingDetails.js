@@ -2,13 +2,17 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+const STORE_PICK_UP = 0;
+const HOME_DELIVERY_PRICE = 450;
+
 export default function ShippingDetails({ setShowPayment }) {
   const { totalAmount } = useSelector((store) => store.cart);
-
-  const STORE_PICK_UP = 0;
-  const HOME_DELIVERY_PRICE = 450;
-
+  const [deliveryType, setDeliveryType] = useState("storePickup");
   const [shippingPrice, setShippingPrice] = useState(STORE_PICK_UP);
+
+  const onDeliveryTypeChange = (e) => {
+    setDeliveryType(e.target.value);
+  };
 
   const storePickupHandler = function (e) {
     const value = e.target.value;
@@ -38,12 +42,13 @@ export default function ShippingDetails({ setShowPayment }) {
           <div className="flex space-x-3 pt-2 md:pt-0">
             <input
               type="radio"
-              name="delivery_type"
+              name="deliveryType"
               value="storePickup"
               id="storePickup"
+              checked={deliveryType === "storePickup"}
               className="outline-none"
-              defaultChecked
               onClick={storePickupHandler}
+              onChange={onDeliveryTypeChange}
             />
             <label htmlFor="storePickup" className="text-xs md:text-sm ">
               Store pickup FREE
@@ -52,11 +57,13 @@ export default function ShippingDetails({ setShowPayment }) {
           <div className="flex space-x-3">
             <input
               type="radio"
-              name="delivery_type"
+              name="deliveryType"
               value="homeDelivery"
               id="homeDelivery"
+              checked={deliveryType === "homeDelivery"}
               className="outline-none"
               onClick={homeDeliveryHandler}
+              onChange={onDeliveryTypeChange}
             />
             <label
               htmlFor="homeDelivery"
